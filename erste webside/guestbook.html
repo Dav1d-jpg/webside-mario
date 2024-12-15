@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gästebuch</title>
+  <style>
+    body { background-color: #00008B; color: white; font-family: Arial, sans-serif; text-align: center; }
+    header {
+      background: #ff0000;
+      padding: 20px;
+      position: relative;
+    }
+    header div.stripe {
+      background-color: #00008B;
+      width: 20px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+    }
+    header div.stripe.left { left: 10%; }
+    header div.stripe.right { right: 10%; }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 300px;
+      border-radius: 10px;
+    }
+    form div { margin-bottom: 10px; }
+    form label, form input, form textarea, form select, form button {
+      display: block;
+      width: 100%;
+    }
+    #entries {
+      margin: 20px auto;
+      max-width: 500px;
+      text-align: left;
+    }
+    .entry {
+      border: 1px solid white;
+      margin: 10px 0;
+      padding: 10px;
+    }
+  </style>
+  <script>
+    function addEntry(event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value;
+      const entry = document.getElementById("entry").value;
+      const question = document.getElementById("question").value;
+
+      const entriesDiv = document.getElementById("entries");
+      const newEntry = document.createElement("div");
+      newEntry.className = "entry";
+      newEntry.innerHTML = `<strong>${name}</strong>: ${entry}<br><em>Lieblingsfigur: ${question}</em>`;
+      entriesDiv.appendChild(newEntry);
+
+      document.getElementById("guestbookForm").reset();
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="stripe left"></div>
+    <div class="stripe right"></div>
+    <h1>Gästebuch</h1>
+    <nav>
+      <a href="index.html">Startseite</a>
+      <a href="about.html">Über mich</a>
+      <a href="guestbook.html">Gästebuch</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Hinterlasse einen Eintrag</h2>
+    <form id="guestbookForm" onsubmit="addEntry(event)">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="entry">Eintrag:</label>
+        <textarea id="entry" name="entry" rows="4" required></textarea>
+      </div>
+      <div>
+        <label for="question">Lieblingsfigur:</label>
+        <select id="question" name="question">
+          <option>Mario</option>
+          <option>Luigi</option>
+          <option>Peach</option>
+          <option>Bowser</option>
+          <option>Toad</option>
+          <option>Wario</option>
+          <option>Goomba</option>
+          <option>Koopa</option>
+          <option>Daisy</option>
+        </select>
+      </div>
+      <button type="submit">Absenden</button>
+    </form>
+    <div id="entries"></div>
+  </main>
+</body>
+</html>
